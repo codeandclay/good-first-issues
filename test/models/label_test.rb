@@ -20,4 +20,11 @@ class LabelTest < ActiveSupport::TestCase
     issue_b.labels << label
     assert_equal 2, label.issues.count
   end
+
+  test 'Label names are unique' do
+    Label.create(name: 'Example Label')
+    assert_raises(ActiveRecord::RecordNotUnique) do
+      Label.create(name: 'Example Label')
+    end
+  end
 end
