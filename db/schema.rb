@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2019_01_23_141221) do
   create_table "issues_labels", id: false, force: :cascade do |t|
     t.integer "issue_id", null: false
     t.integer "label_id", null: false
+    t.index ["issue_id", "label_id"], name: "index_issues_labels_on_issue_id_and_label_id"
+    t.index ["label_id", "issue_id"], name: "index_issues_labels_on_label_id_and_issue_id"
   end
 
   create_table "labels", force: :cascade do |t|
