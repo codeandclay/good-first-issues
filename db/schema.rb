@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_135050) do
+ActiveRecord::Schema.define(version: 2019_01_23_141221) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 2019_01_23_135050) do
     t.string "user_avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "issues_labels", id: false, force: :cascade do |t|
+    t.integer "issue_id", null: false
+    t.integer "label_id", null: false
   end
 
   create_table "labels", force: :cascade do |t|

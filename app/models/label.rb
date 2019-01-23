@@ -1,3 +1,3 @@
 class Label < ApplicationRecord
-  belongs_to :issue
+  has_and_belongs_to_many :issues
 end

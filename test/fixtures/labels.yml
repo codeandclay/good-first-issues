@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  issue: one
+  issues: []
 
 two:
   name: MyString
-  issue: two
+  issues: []
