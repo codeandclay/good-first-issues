@@ -2,7 +2,7 @@ require 'test_helper'
 
 class LabelTest < ActiveSupport::TestCase
   test 'A label can be created' do
-    assert true, Label.create
+    assert Label.create
   end
 
   test 'A label can be assigned to an issue' do
