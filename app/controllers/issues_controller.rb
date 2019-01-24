@@ -13,7 +13,7 @@ class IssuesController < ApplicationController
   private
 
   def title
-    # language_title || issue_title || base_title
+    language_title || issue_title || base_title
   end
 
   def language_title
