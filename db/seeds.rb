@@ -71,43 +71,14 @@ class Issues
   end
 end
 
-languages = [
-  'Assembly',
-  'C',
-  'C#',
-  'C++',
-  'Clojure',
-  'CoffeeScript',
-  'CSS',
-  'Elixir',
-  'Emacs Lisp',
-  'F#',
-  'Go',
-  'Haskell',
-  'HTML',
-  'Java',
-  'JavaScript',
-  'Julia',
-  'Kotlin',
-  'Lua',
-  'Makefile',
-  'Objective-C',
-  'Perl',
-  'PHP',
-  'PowerShell',
-  'Python',
-  'R',
-  'Ruby',
-  'Rust',
-  'Scala',
-  'Shell',
-  'Swift',
-  'TeX',
-  'TypeScript',
-  'Vim script',
-  'Vue'
-]
+# Record start time so that total running time can be logged on completion.
+time_started = Time.now
 
+# Get a list of all languages on Github
+languages = JSON.parse(open('https://api.github.com/languages').read)
+                .map { |language| language['name'] }
+
+# Now get a list of issues for each language
 all_issues = languages.flat_map do |language|
   query = {
     language: language,
@@ -115,30 +86,32 @@ all_issues = languages.flat_map do |language|
     label: 'good first issue'
   }.map { |k, v| "#{k}:\"#{v}\"" }.join('+')
 
+  # Pause for a short while to keep within Github limits. NB: I was getting
+  # timeouts with the delay set at 2 seconds so I upped it to 3.
+  sleep(3)
+
   puts "Fetching issues for #{language}.".colorize(:green)
 
   Issues.new(query).to_a.map do |issue|
     url = issue['html_url']
-    begin
-      {
-        assigned: issue['assignees'].any?,
-        description: issue['body'],
-        labels: issue['labels'].map { |label| label['name'] },
-        language: language,
-        repo_name: url.match(%r{.com\/(.*?)\/issues})[1],
-        title: issue['title'],
-        created_at: Time.parse(issue['updated_at']),
-        url: url,
-        user_avatar_url: issue['user']['avatar_url']
-      }
-    end
+    {
+      title: issue['title'],
+      description: issue['body'],
+      language: language,
+      url: url,
+      repo_name: url.match(%r{.com\/(.*?)\/issues})[1],
+      user_avatar_url: issue['user']['avatar_url'],
+      labels: issue['labels'].map { |label| label['name'] },
+      assigned: issue['assignees'].any?,
+      created_at: Time.parse(issue['created_at'])
+    }
   end
 end.uniq
 
 puts 'Seeding database with fetched data.'.colorize(:blue)
 
-time_started = Time.now
-
+# Format issues as an array of hashes so that they can be created in one call
+# to the db.
 all_issues.map! do |issue|
   labels = issue[:labels].map do |label|
     Label.where(name: label).first_or_create
