@@ -17,6 +17,13 @@ class IssueTest < ActiveSupport::TestCase
     10.times { label.issues << Issue.create }
     assert_equal 10, Issue.by_labels('Label').count
   end
+
+  test 'A collection of issues is returned when multiple labels are given' do
+    label_a = Label.create(name: 'Label A')
+    label_b = Label.create(name: 'Label B')
+    10.times { label_a.issues << Issue.create }
+    10.times { label_b.issues << Issue.create }
+    assert_equal 20, Issue.by_labels(['Label A', 'Label B']).count
   end
 
   test 'A collection of issues is returned whena language name is given' do
