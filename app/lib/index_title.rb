@@ -22,8 +22,4 @@ class IndexTitle
   def base_title
     'All issues'
   end
-
-  def paginated(collection)
-    collection.paginate(page: params[:page])
-  end
 end
