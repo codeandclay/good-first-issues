@@ -1,0 +1,16 @@
+<div class="issue">
+  <div class="user-avatar">
+    <%= image_tag(issue.user_avatar_url, size: '50x50') %>
+  </div>
+  <div class="details">
+    <span class="repo-name"><%= issue.repo_name %></span>
+    <span class="issue-title"><%= link_to issue.title, issue.url %></span>
+    <span class="created-at"><%= time_ago_in_words(issue.created_at) %> ago</span>
+    <div class="labels">
+      <div class="language-badge"><%= issue.language %></div>
+      <% issue.labels.each do |label| %>
+        <%= tag.div label.name, class: 'badge' %>
+      <% end %>
+    </div>
+  </div>
+</div>
