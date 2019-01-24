@@ -1,6 +1,6 @@
 <div class="content issues">
   <h1>Open Issues <span class="meta">Updated <%= time_ago_in_words(@issues.first.updated_at) %> ago</span></h1>
-  <%= will_paginate @issues %>
+  <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>
-  <%= will_paginate @issues %>
+  <%= will_paginate @issues, class: 'pagination bottom-pagination' %>
 </div>
