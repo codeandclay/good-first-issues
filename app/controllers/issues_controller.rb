@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
     elsif language = safe_params[:language]
       @issues = paginated(Issue.by_language(language))
     else
-      @issues = Issue.paginate(page: params[:page])
+      @issues = paginated(Issue)
     end
   end
 
