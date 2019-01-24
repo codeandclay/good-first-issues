@@ -1,11 +1,11 @@
 class IssuesController < ApplicationController
   def index
     if label = safe_params[:label]
-      @issues = paginated(Issue.by_label(label))
+      @issues = paginated(Issue.by_label(label).includes(:labels))
     elsif language = safe_params[:language]
-      @issues = paginated(Issue.by_language(language))
+      @issues = paginated(Issue.by_language(language).includes(:labels))
     else
-      @issues = paginated(Issue)
+      @issues = paginated(Issue.all.includes(:labels))
     end
     @title = title
   end
