@@ -1,9 +1,9 @@
 class IssuesController < ApplicationController
   def index
     if tag = safe_params[:tag]
-      @issues = paginated(Label.find_by(name: tag).issues)
+      @issues = paginated(Issue.by_label(tag))
     elsif language = safe_params[:language]
-      @issues = paginated(Issue.where(language: language))
+      @issues = paginated(Issue.by_language(language))
     else
       @issues = Issue.paginate(page: params[:page])
     end
