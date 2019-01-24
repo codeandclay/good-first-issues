@@ -3,7 +3,7 @@ class Issue < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   def self.by_label(name)
-    Label.find_by(name: name).issues
+    joins(:labels).where(labels: { name: name })
   end
 
   def self.by_language(name)
