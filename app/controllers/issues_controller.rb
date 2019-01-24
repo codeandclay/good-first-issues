@@ -1,8 +1,8 @@
 class IssuesController < ApplicationController
   def index
-    if label = safe_params[:label]
+    if label = params[:label]
       @issues = paginated(Issue.by_label(label).includes(:labels))
-    elsif language = safe_params[:language]
+    elsif language = params[:language]
       @issues = paginated(Issue.by_language(language).includes(:labels))
     else
       @issues = paginated(Issue.all.includes(:labels))
@@ -30,9 +30,5 @@ class IssuesController < ApplicationController
 
   def paginated(collection)
     collection.paginate(page: params[:page])
-  end
-
-  def safe_params
-    params.permit(:label, :language)
   end
 end
