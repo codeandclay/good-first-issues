@@ -9,7 +9,7 @@
     <div class="labels">
       <%= link_to issue.language, issues_path(language: issue.language), class: 'language-badge' %>
       <% issue.labels.each do |label| %>
-        <%= link_to label.name, issues_path(tag: label.name), class: 'badge' %>
+        <%= link_to label.name, issues_path(label: label.name), class: 'badge' %>
       <% end %>
     </div>
   </div>
