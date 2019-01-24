@@ -1,5 +1,5 @@
 class IssuesController < ApplicationController
   def index
-    @issues = Issue.all
+    @issues = Issue.paginate(page: params[:page])
   end
 end
