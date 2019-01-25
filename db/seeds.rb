@@ -120,7 +120,11 @@ all_issues.map! do |issue|
 
     Label.where(name: label).first_or_create
   end.compact
-  issue.merge(labels: labels)
+
+  # Issues and language are stored in separate tables
+  language_name = issue[:language]
+  language = Language.where(name: language_name).first_or_create
+  issue.merge(labels: labels).merge(language: language) rescue byebug
 end
 
 Issue.create(all_issues)

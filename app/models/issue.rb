@@ -1,6 +1,7 @@
 class Issue < ApplicationRecord
   has_many :tags
   has_many :labels, through: :tags
+  belongs_to :language
 
   default_scope { order(created_at: :desc) }
 
@@ -9,7 +10,7 @@ class Issue < ApplicationRecord
   }
 
   scope :by_language, lambda { |language|
-    where(language: language)
+    joins(:language).where(languages: { name: language })
   }
 
   scope :by_language_and_labels, lambda { |language, labels|
