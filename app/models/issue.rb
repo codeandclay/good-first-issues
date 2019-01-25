@@ -1,5 +1,7 @@
 class Issue < ApplicationRecord
-  has_and_belongs_to_many :labels
+  has_many :tags
+  has_many :labels, through: :tags
+
   default_scope { order(created_at: :desc) }
 
   scope :by_labels, lambda { |labels|
