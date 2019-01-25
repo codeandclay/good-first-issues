@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   def index
     @issues = issues.includes(:labels).paginate(page: params[:page])
-    @title = IndexTitle.new(params).to_s
+    @title = IndexTitle.new(params, @issues.length).to_s
   end
 
   private
