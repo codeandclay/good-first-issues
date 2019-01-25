@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_110728) do
+ActiveRecord::Schema.define(version: 2019_01_25_135037) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2019_01_25_110728) do
     t.datetime "updated_at", null: false
     t.index ["issue_id"], name: "index_labels_on_issue_id"
     t.index ["name"], name: "index_labels_on_name", unique: true
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+    t.string "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
