@@ -11,4 +11,8 @@ class Issue < ApplicationRecord
   scope :by_language, lambda { |language|
     where(language: language)
   }
+
+  scope :by_language_and_labels, lambda { |language, labels|
+    by_language(language).merge by_labels(labels)
+  }
 end

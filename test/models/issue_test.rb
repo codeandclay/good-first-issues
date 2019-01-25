@@ -30,4 +30,13 @@ class IssueTest < ActiveSupport::TestCase
     10.times { Issue.create(language: 'Test') }
     assert_equal 10, Issue.by_language('Test').count
   end
+
+  test 'A collection of issues is returned when language and labels are specified' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    2.times { Issue.create(language: 'Test Language A', labels: [label_a, label_b]) }
+    3.times { Issue.create(language: 'Test Language A', labels: [label_a]) }
+    5.times { Issue.create(language: 'Test Language A', labels: [label_b]) }
+    assert_equal 5, Issue.by_language_and_labels('Test Language A', 'bug').count
+  end
 end
