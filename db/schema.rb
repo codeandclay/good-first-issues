@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_094602) do
+ActiveRecord::Schema.define(version: 2019_01_25_110728) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
@@ -22,13 +22,6 @@ ActiveRecord::Schema.define(version: 2019_01_25_094602) do
     t.string "user_avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "issues_labels", id: false, force: :cascade do |t|
-    t.integer "issue_id", null: false
-    t.integer "label_id", null: false
-    t.index ["issue_id", "label_id"], name: "index_issues_labels_on_issue_id_and_label_id"
-    t.index ["label_id", "issue_id"], name: "index_issues_labels_on_label_id_and_issue_id"
   end
 
   create_table "labels", force: :cascade do |t|
