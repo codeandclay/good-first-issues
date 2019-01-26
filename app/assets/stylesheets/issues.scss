@@ -126,7 +126,11 @@ button {
 }
 
 .pagination {
+  color: $blue;
   margin-bottom: 1rem;
+  a {
+    color: $blue;
+  }
 }
 
 .top-pagination {
