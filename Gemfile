@@ -6,6 +6,7 @@ ruby '2.6.0'
 gem 'colorize'
 gem 'nitlink'
 gem 'will_paginate', '~> 3.1.0'
+gem 'rails-controller-testing'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
