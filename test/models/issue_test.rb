@@ -46,4 +46,11 @@ class IssueTest < ActiveSupport::TestCase
     5.times { Issue.create(language: language_a, labels: [label_b]) }
     assert_equal 5, Issue.by_language_and_labels('Test Language A', 'bug').count
   end
+
+  test 'All labels are returned for an issue when filtering by label' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    Issue.create(language: @language, labels: [label_a, label_b])
+    assert_equal ['bug', 'fix'], Issue.by_labels('bug').first.labels.map(&:name)
+  end
 end
