@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_151221) do
+ActiveRecord::Schema.define(version: 2019_01_26_185413) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
     t.text "description"
     t.string "repo_name"
     t.string "title"
-    t.string "url"
-    t.string "user_avatar_url"
+    t.string "url", default: ""
+    t.string "user_avatar_url", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "language_id"
