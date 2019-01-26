@@ -66,6 +66,7 @@
     .repo-name {
       grid-column: 1 / 3;
       font-weight: $font-weight-heavy;
+      color: $grey;
       align-self: start;
       word-wrap:break-word;
     }
@@ -81,7 +82,7 @@
         grid-column: 3;
         justify-self: end;
       }
-      color: $dusty;
+      color: $grey;
       align-self: start;
     }
 
