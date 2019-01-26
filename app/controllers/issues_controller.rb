@@ -1,10 +1,13 @@
 class IssuesController < ApplicationController
   def index
-    @issues = issues.includes(:labels, :language).paginate(page: params[:page])
-    @title = IndexTitle.new(params, @issues.length).to_s
+    @issues = DecoratedIssues.new(paginated_issues)
   end
 
   private
+
+  def paginated_issues
+    issues.includes(:labels, :language).paginate(page: params[:page])
+  end
 
   def labels
     params[:label]
