@@ -6,7 +6,16 @@ class IssuesController < ApplicationController
   private
 
   def paginated_issues
-    issues.includes(:labels, :language).paginate(page: params[:page])
+    # When referencing the tables by symbol, the returned records only
+    # include the matching labels:
+    # > issues.includes(:labels, :language).first.labels.map(&:name)
+    # => ["bug"]
+    #
+    # The expected result is:
+    # => ["bug", "help wanted"]
+    # I don't yet understand why but it works as expected when referencing the
+    # tables by string.
+    issues.includes('labels', 'language').paginate(page: params[:page])
   end
 
   def labels
