@@ -1,4 +1,5 @@
 .badge {
+  display: inline-block;
   font-weight: $font-weight-heavy;
   font-size: $base-font-size/1.5;
   align-self: start;
@@ -18,19 +19,25 @@
   }
 }
 
+.tags-wrapper {
+  // background-color: $light-grey;
+  // padding-bottom: 2rem;
+}
+
+.tags {
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  // border-color: $medium-grey;
+  border-style: dotted;
+  .tags-link {
+    margin: 2rem 0;
+    display: block;
+  }
+}
+
 .issues {
   display: grid;
   grid-row-gap: 1rem;
-  h1 {
-    font-weight: normal;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    color: shade($red, 25%);
-    .meta {
-      font-size: $small-font;
-      color: $grey;
-    }
-  }
 }
 
 .issue {
@@ -68,7 +75,6 @@
       font-weight: $font-weight-heavy;
       color: $grey;
       align-self: start;
-      word-wrap:break-word;
     }
 
     .issue-title {
@@ -90,12 +96,11 @@
       grid-column: 1 / 3;
       align-items: start;
       .badge {
-        display: inline;
+        display: inline-block;
         width: auto;
         cursor: pointer;
         background-color: $green;
         color: white;
-        line-height: 2.75rem;
       }
     }
   }
@@ -105,14 +110,14 @@
   @extend .badge;
   background-color: $yellow !important;
   color: black !important;
-  line-height: 2.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .label-badge {
   @extend .badge;
   background-color: $green;
   color: white;
-  line-height: 2.25rem;
+  margin-bottom: 0.25rem;
 }
 
 button {
@@ -128,19 +133,19 @@ button {
 }
 
 .pagination {
-  color: $blue;
+  color: $light-blue;
   margin-bottom: 1rem;
   a {
-    color: $blue;
+    color: $light-blue;
   }
 }
 
 .top-pagination {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .bottom-pagination {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .all_languages, .all_labels {
