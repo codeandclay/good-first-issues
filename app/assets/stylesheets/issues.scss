@@ -99,18 +99,20 @@
       }
     }
   }
+}
 
-  .language-badge {
-    @extend .badge;
-    font-weight: $font-weight-heavy;
-    font-size: $base-font-size/1.5;
-    // align-self: start;
-    // justify-self: end;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: $yellow !important;
-    color: black !important;
-  }
+.language-badge {
+  @extend .badge;
+  background-color: $yellow !important;
+  color: black !important;
+  line-height: 2.25rem;
+}
+
+.label-badge {
+  @extend .badge;
+  background-color: $green;
+  color: white;
+  line-height: 2.25rem;
 }
 
 button {
@@ -139,4 +141,11 @@ button {
 
 .bottom-pagination {
   margin-top: 0.5rem;
+}
+
+.all_languages, .all_labels {
+  display: grid;
+  .badge {
+    display: inline-block;
+  }
 }

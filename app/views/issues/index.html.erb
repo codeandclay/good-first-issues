@@ -1,5 +1,19 @@
+<div class="content">
+  <div class="tags">
+    <h2>Top labels</h2>
+    <% @issues.top_labels.each do |label| %>
+      <%= link_to label, issues_path(label: label), class: 'label-badge' %>
+    <% end %>
+    <h2>Top languages</h2>
+    <% @issues.top_languages.each do |language| %>
+      <%= link_to language, issues_path(language: language), class: 'language-badge' %>
+    <% end %>
+  </div>
+</div>
+
 <div class="content issues">
   <h1><%= @issues.title %> <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span></h1>
+
   <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>
   <%= will_paginate @issues, class: 'pagination bottom-pagination' %>
