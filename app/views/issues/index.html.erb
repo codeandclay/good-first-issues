@@ -1,13 +1,17 @@
-<div class="content">
-  <div class="tags">
-    <h2>Top labels</h2>
-    <% @issues.top_labels.each do |label| %>
-      <%= link_to label, issues_path(label: label), class: 'label-badge' %>
-    <% end %>
-    <h2>Top languages</h2>
-    <% @issues.top_languages.each do |language| %>
-      <%= link_to language, issues_path(language: language), class: 'language-badge' %>
-    <% end %>
+<div class="tags-wrapper">
+  <div class="content">
+    <div class="tags">
+      <h2>Top labels</h2>
+      <% @issues.top_labels.each do |label| %>
+        <%= link_to label, issues_path(label: label), class: 'label-badge' %>
+      <% end %>
+      <h2>Top languages</h2>
+      <% @issues.top_languages.each do |language| %>
+        <%= link_to language, issues_path(language: language), class: 'language-badge' %>
+      <% end %>
+    </div>
+    <br>
+    <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
   </div>
 </div>
 
