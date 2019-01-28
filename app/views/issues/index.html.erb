@@ -9,9 +9,8 @@
       <% @issues.top_languages.each do |language| %>
         <%= link_to language, issues_path(language: language), class: 'language-badge' %>
       <% end %>
+      <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
     </div>
-    <br>
-    <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
   </div>
 </div>
 

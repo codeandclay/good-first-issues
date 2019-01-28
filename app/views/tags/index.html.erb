@@ -1,10 +1,9 @@
 <div class="content">
-  <div class="tags">
     <h2>All languages</h2>
     <% @languages.each do |language| %>
       <%= link_to language, issues_path(language: language), class: 'language-badge' %>
     <% end %>
-  </div>
+
     <h2>All labels</h2>
     <% @labels.each do |label| %>
       <%= link_to label, issues_path(label: label), class: 'label-badge' %>
