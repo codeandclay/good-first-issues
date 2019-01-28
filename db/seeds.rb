@@ -116,7 +116,7 @@ all_issues.map! do |issue|
   labels = issue[:labels].map do |label|
     # All issues are expected to be 'good first issue' so issues should not be
     # tagged with this label.
-    next if label == 'good first issue'
+    next if label.downcase == 'good first issue'
 
     Label.where(name: label).first_or_create
   end.compact
