@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   def index
-    @issues = DecoratedIssues.new(paginated_issues)
+    @issues = DecoratedIssues.new(paginated_issues.includes('labels', 'language'))
   end
 
   private
@@ -15,7 +15,7 @@ class IssuesController < ApplicationController
     # => ["bug", "help wanted"]
     # I don't yet understand why but it works as expected when referencing the
     # tables by string.
-    issues.includes('labels', 'language').paginate(page: params[:page])
+    issues.paginate(page: params[:page])
   end
 
   def labels
