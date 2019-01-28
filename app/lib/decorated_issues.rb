@@ -7,6 +7,10 @@ class DecoratedIssues < SimpleDelegator
     specific_title
   end
 
+  def updated_at
+    first.updated_at
+  end
+
   private
 
   def default_title
