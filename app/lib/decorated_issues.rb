@@ -12,21 +12,11 @@ class DecoratedIssues < SimpleDelegator
   end
 
   def top_labels
-    Label.left_joins(:issues)
-         .group(:id)
-         .order('COUNT("issue.id") DESC')
-         .where.not('labels.name': nil)
-         .distinct.pluck(:name)
-         .take(10)
+    Label.top
   end
 
   def top_languages
-    Language.left_joins(:issues)
-           .group(:id)
-           .order('COUNT("issue.id") DESC')
-           .where.not('languages.name': nil)
-           .distinct.pluck(:name)
-           .take(20)
+    Language.top
   end
 
   private
