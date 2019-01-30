@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_26_185413) do
+ActiveRecord::Schema.define(version: 2019_01_30_133348) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
@@ -26,10 +26,8 @@ ActiveRecord::Schema.define(version: 2019_01_26_185413) do
 
   create_table "labels", force: :cascade do |t|
     t.string "name"
-    t.integer "issue_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["issue_id"], name: "index_labels_on_issue_id"
     t.index ["name"], name: "index_labels_on_name", unique: true
   end
 
