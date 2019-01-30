@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
   def index
-    @issues = DecoratedIssues.new(paginated_issues.includes('labels', 'language'))
+    @issues = DecoratedIssues.new(paginated_issues.preload(:labels, :language))
   end
 
   private
