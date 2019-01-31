@@ -13,15 +13,15 @@ class IssuesController < ApplicationController
     params[:label]
   end
 
-  def language
+  def languages
     params[:language]
   end
 
   def issues
     # TODO: Is this possible to achieve in a single query?
-    return Issue.by_language_and_labels(language, labels) if language && labels
+    return Issue.by_languages_and_labels(languages, labels) if languages && labels
     return Issue.by_labels(labels) if labels
-    return Issue.by_language(language) if language
+    return Issue.by_languages(languages) if languages
 
     Issue.all
   end

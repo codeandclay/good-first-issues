@@ -9,11 +9,11 @@ class Issue < ApplicationRecord
     joins(:labels).where(labels: { name: labels })
   }
 
-  scope :by_language, lambda { |language|
-    joins(:language).where(languages: { name: language })
+  scope :by_languages, lambda { |languages|
+    joins(:language).where(languages: { name: languages })
   }
 
-  scope :by_language_and_labels, lambda { |language, labels|
-    by_language(language).merge by_labels(labels)
+  scope :by_languages_and_labels, lambda { |languages, labels|
+    by_languages(languages).merge by_labels(labels)
   }
 end

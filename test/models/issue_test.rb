@@ -34,7 +34,7 @@ class IssueTest < ActiveSupport::TestCase
   test 'A collection of issues is returned when a language name is given' do
     language = Language.create(name: 'The Language')
     10.times { Issue.create(language: language) }
-    assert_equal 10, Issue.by_language('The Language').count
+    assert_equal 10, Issue.by_languages('The Language').count
   end
 
   test 'A collection of issues is returned when language and labels are specified' do
@@ -44,7 +44,7 @@ class IssueTest < ActiveSupport::TestCase
     2.times { Issue.create(language: language_a, labels: [label_a, label_b]) }
     3.times { Issue.create(language: language_a, labels: [label_a]) }
     5.times { Issue.create(language: language_a, labels: [label_b]) }
-    assert_equal 5, Issue.by_language_and_labels('Test Language A', 'bug').count
+    assert_equal 5, Issue.by_languages_and_labels('Test Language A', 'bug').count
   end
 
   test 'All labels are returned for an issue when filtering by label' do
