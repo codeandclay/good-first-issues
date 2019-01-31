@@ -18,6 +18,7 @@ class IssuesController < ApplicationController
   end
 
   def issues
+    # TODO: Is this possible to achieve in a single query?
     return Issue.by_language_and_labels(language, labels) if language && labels
     return Issue.by_labels(labels) if labels
     return Issue.by_language(language) if language
