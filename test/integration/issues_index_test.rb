@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class IssuesIndexTest < ActionDispatch::IntegrationTest
-  test 'the truth' do
+  test 'an issue will be displayed with all its labels when only one is provided in params' do
     language = Language.new(name: 'C')
     label_a = Label.new(name: 'label a')
     label_b = Label.new(name: 'label b')
