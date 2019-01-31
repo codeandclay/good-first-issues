@@ -10,11 +10,11 @@ class IssuesController < ApplicationController
   end
 
   def labels
-    params[:label]
+    params[:labels]
   end
 
   def languages
-    params[:language]
+    params[:languages]
   end
 
   def issues

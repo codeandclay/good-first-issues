@@ -12,7 +12,7 @@ class IssuesIndexTest < ActionDispatch::IntegrationTest
       user_avatar_url: 'https://example.com/image.png'
     )
 
-    get '/issues?label=label+a'
+    get '/issues?labels=label+a'
     assert_select 'a', 'label b'
   end
 end
