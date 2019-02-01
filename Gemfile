@@ -7,6 +7,8 @@ gem 'colorize'
 # Parses HTTP Link headers. (Included for GH response headers in scraper.)
 gem 'nitlink'
 gem 'will_paginate', '~> 3.1.0'
+# This gem brings back assigns to your controller tests as well as
+# assert_template to both controller and integration tests.
 gem 'rails-controller-testing'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
