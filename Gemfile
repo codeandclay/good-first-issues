@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.0'
 
 gem 'colorize'
+# Parses HTTP Link headers. (Included for GH response headers in scraper.)
 gem 'nitlink'
 gem 'will_paginate', '~> 3.1.0'
 gem 'rails-controller-testing'
