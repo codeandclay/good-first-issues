@@ -27,8 +27,7 @@
 .tags {
   border-width: 0 0 1px 0;
   border-style: solid;
-  // border-color: $medium-grey;
-  border-style: dotted;
+  border-color: $light-grey;
   .tags-link {
     margin: 2rem 0;
     display: block;
@@ -66,8 +65,8 @@
     grid-column: 2 / 3;
 
     border-width: 0 0 1px 0;
-    border-style: dotted;
-    border-color: $medium-grey;
+    border-style: solid;
+    border-color: $light-grey;
     padding: 0 0 1.25rem 0;
 
     .repo-name {
