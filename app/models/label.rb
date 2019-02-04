@@ -10,4 +10,8 @@ class Label < ApplicationRecord
     .take(10)
     .map(&:first)
   end
+
+  scope :by_search_term, lambda { |term|
+    where("name LIKE ?", "%#{term}%")
+  }
 end

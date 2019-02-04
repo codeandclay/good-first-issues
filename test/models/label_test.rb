@@ -31,4 +31,14 @@ class LabelTest < ActiveSupport::TestCase
       Label.create(name: 'Example Label')
     end
   end
+
+  test 'A label can be queried by matching only part of its name' do
+    label = Label.create(name: 'bug')
+
+    assert_equal 'bug', Label.by_search_term('b').first.name
+    assert_equal 'bug', Label.by_search_term('bu').first.name
+    assert_equal 'bug', Label.by_search_term('u').first.name
+    assert_equal 'bug', Label.by_search_term('ug').first.name
+    assert_equal 'bug', Label.by_search_term('g').first.name
+  end
 end

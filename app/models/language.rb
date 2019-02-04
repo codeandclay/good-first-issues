@@ -9,4 +9,8 @@ class Language < ApplicationRecord
     .take(10)
     .map(&:first)
   end
+
+  scope :by_search_term, lambda { |term|
+    where("name like ?", "%#{term}%")
+  }
 end
