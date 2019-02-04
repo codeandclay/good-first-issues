@@ -6,7 +6,7 @@ class Issue < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :by_labels, lambda { |labels|
-    joins(:labels).where(labels: { name: labels })
+    joins(:labels).where(labels: { name: labels }).distinct
   }
 
   scope :by_language, lambda { |language|

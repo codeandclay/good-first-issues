@@ -53,4 +53,11 @@ class IssueTest < ActiveSupport::TestCase
     Issue.create(language: @language, labels: [label_a, label_b])
     assert_equal ['bug', 'fix'], Issue.by_labels('bug').first.labels.map(&:name)
   end
+
+  test 'An issue is returned once only if multiple tags match' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    Issue.create(language: @language, labels: [label_a, label_b])
+    assert_equal 1, Issue.by_labels(['bug', 'fix']).count
+  end
 end
