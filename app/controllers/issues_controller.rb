@@ -10,7 +10,8 @@ class IssuesController < ApplicationController
   end
 
   def labels
-    params[:labels]
+    return if params[:labels].nil?
+    JSON.parse(params[:labels])
   end
 
   def language
