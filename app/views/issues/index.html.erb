@@ -14,7 +14,7 @@
       <% end %>
     </div>
   <% end %>
-  <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
+  <%= link_to 'See all tags', tags_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
 
   <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>
