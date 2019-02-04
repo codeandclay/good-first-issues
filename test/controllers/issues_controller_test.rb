@@ -77,7 +77,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
   test 'an issue will be displayed with all its labels when only one is provided in params' do
     @issues.first.labels << Label.create(name: 'Label X')
-    get '/issues?labels=Label+A'
+    get "/issues?labels=#{['Label A'].to_json}"
     actual = assigns(:issues).first.labels.map(&:name)
     assert_equal ['Label A', 'Label X'], actual
   end
@@ -85,7 +85,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
   test 'issues will be shown that intersecy the provide labels and languages params' do
     @issues.first.labels << Label.create(name: 'Label X')
     @issues.last.labels << Label.first_or_create(name: 'Label X')
-    get '/issues?languages=Language+A&labels=Label+X'
+    get "/issues?language=Language+A&labels=#{['Label+X'].to_json}"
     assert_equal 1, assigns(:issues).count
   end
 end

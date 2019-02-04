@@ -24,16 +24,10 @@
   // padding-bottom: 2rem;
 }
 
-.tags {
-  border-width: 0 0 1px 0;
-  border-style: solid;
-  border-color: $light-grey;
-  .tags-link {
-    margin: 2rem 0;
-    display: block;
-  }
+.tags-link {
+  margin: 0 0 1.5rem 0;
+  display: block;
 }
-
 .issues {
   display: grid;
   grid-row-gap: 1rem;

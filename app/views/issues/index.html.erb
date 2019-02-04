@@ -1,13 +1,20 @@
-<div class="tags-wrapper">
-  <div class="content">
-    <div class="tags">
-      <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
-    </div>
-  </div>
-</div>
-
 <div class="content issues">
-  <h1><%= @issues.title %> <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span></h1>
+  <h1><%= @issues.title %>
+    <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span>
+  </h1>
+  <% if params['language'] || params['labels'] %>
+    <div class="tags">
+      <% if params['language'] %>
+      <%= link_to "#{sanitize('&#65293;')} #{params['language']}", issues_path(labels: params['labels']), class: 'language-badge' %>
+      <% end %>
+      <% if params['labels'] %>
+        <% JSON.parse(params['labels']).each do |label| %>
+          <%= link_to "#{sanitize('&#65293;')} #{label}", issues_path(labels: labels_without_label(label), language: params['language']), class: 'label-badge' %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
 
   <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>

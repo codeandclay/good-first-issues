@@ -10,7 +10,7 @@ class IssuesController < ApplicationController
   end
 
   def labels
-    return if params[:labels].nil?
+    return if params[:labels].nil? || JSON.parse(params[:labels]).empty?
     JSON.parse(params[:labels])
   end
 

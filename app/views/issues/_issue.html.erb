@@ -7,9 +7,9 @@
     <span class="issue-title"><%= link_to issue.title, issue.url %></span>
     <span class="created-at"><%= time_ago_in_words(issue.created_at) %> ago</span>
     <div class="labels">
-      <%= link_to "#{sanitize('&#65291;')} #{issue.language.name}", issues_path(language: issue.language.name, labels: params['labels']), class: 'language-badge' %>
+      <%= language_link(issue.language.name) %>
       <% issue.labels.each do |label| %>
-        <%= link_to "#{sanitize('&#65291;')} #{label.name}", issues_path(labels: combined_labels(label.name), language: params['language']), class: 'badge' %>
+        <%= label_link(label.name) %>
       <% end %>
     </div>
   </div>
