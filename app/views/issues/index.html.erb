@@ -1,14 +1,6 @@
 <div class="tags-wrapper">
   <div class="content">
     <div class="tags">
-      <h2>Top labels</h2>
-      <% @issues.top_labels.each do |label| %>
-        <%= link_to label, issues_path(labels: label, languages: params['languages']), class: 'label-badge' %>
-      <% end %>
-      <h2>Top languages</h2>
-      <% @issues.top_languages.each do |language| %>
-        <%= link_to language, issues_path(languages: language, labels: params['labels']), class: 'language-badge' %>
-      <% end %>
       <%= link_to 'See all tags', tags_path, class: 'tags-link' %>
     </div>
   </div>
