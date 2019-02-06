@@ -26,7 +26,7 @@ module ApplicationHelper
   def deserialized_labels_params
     return [] if params['labels'].nil?
 
-    JSON.parse(params['labels'])
+    labels
   end
 
   def label_link(label)
@@ -61,7 +61,6 @@ module ApplicationHelper
   def selected_labels_links
     return if params['labels'].nil?
 
-    labels = JSON.parse params['labels']
     labels.map do |label|
       selected_label_link(label)
     end.join(' ').html_safe
@@ -69,5 +68,9 @@ module ApplicationHelper
 
   def base_tag_link(symbol: '&#65293;', body:, params: {}, css_class: 'badge')
     link_to "#{sanitize(symbol)} #{body}", issues_path(params), class: css_class
+  end
+
+  def labels
+    JSON.parse params['labels']
   end
 end
