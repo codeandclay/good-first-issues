@@ -1,54 +1,73 @@
 module ApplicationHelper
-  def combined_labels(label_name)
-    if params['labels'].nil?
-      labels = []
-    else
-      labels = JSON.parse params['labels']
-    end
-
-    return labels.to_json if labels.include? label_name
-
-    (labels + [label_name]).to_json
+  def language_link(language)
+    return selected_language_link if language == params['language']
+    add_language_link(language)
   end
 
-  def labels_without_label(label_name)
+  def selected_language_link
+    return if params['language'].nil?
+
+    base_tag_link(
+      body: params['language'],
+      params: { labels: params[:labels] },
+      css_class: 'language-badge'
+    )
+  end
+
+  def add_language_link(language)
+    base_tag_link(
+      symbol: '&#65291;',
+      body: language,
+      params: { labels: params['labels'], language: language },
+      css_class: 'language-badge'
+    )
+  end
+
+  def deserialized_labels_params
+    return [] if params['labels'].nil?
+
+    JSON.parse(params['labels'])
+  end
+
+  def label_link(label)
+    return add_label_link(label) unless deserialized_labels_params.include?(label)
+    selected_label_link(label)
+  end
+
+  def selected_label_link(label)
+    base_tag_link(
+      body: label,
+      params: {
+        language: params['language'],
+        labels: (deserialized_labels_params.reject { |i| i == label }).to_json
+      },
+      css_class: 'label-badge'
+    )
+  end
+
+  def add_label_link(label)
+    labels = deserialized_labels_params
+    base_tag_link(
+      body: label,
+      symbol: '&#65291;',
+      params: {
+        language: params['language'],
+        labels: (labels + [label]).to_json
+      },
+      css_class: 'label-badge'
+    )
+  end
+
+  def selected_labels_links
+    return if params['labels'].nil?
+
     labels = JSON.parse params['labels']
-    (labels.delete_if { |i| i == label_name }).to_json
+    labels.map do |label|
+      selected_label_link(label)
+    end.join(' ').html_safe
   end
 
-  def language_link(language_name)
-    if params['language'] == language_name
-      link_to language_name_to_remove(language_name), issues_path(labels: params['labels']), class: 'language-badge'
-    else
-      link_to language_name_to_add(language_name), issues_path(language: language_name, labels: params['labels']), class: 'language-badge'
-    end
-  end
-
-  def language_name_to_add(language_name)
-    return language_name if params['language'] == language_name
-    "#{sanitize('&#65291;')} #{language_name}"
-  end
-
-  def language_name_to_remove(language_name)
-    remove_language = "#{sanitize('&#65293;')} #{language_name}"
-  end
-
-  def label_link(label_name)
-    if params['labels'] and JSON.parse(params['labels']).include? label_name
-      link_to label_name_to_remove(label_name), issues_path(labels: labels_without_label(label_name), language: params['language']), class: 'label-badge'
-    else
-      link_to label_name_to_add(label_name), issues_path(labels: combined_labels(label_name), language: params['language']), class: 'label-badge'
-    end
-  end
-
-  def label_name_to_add(label_name)
-    add_label = "#{sanitize('&#65291;')} #{label_name}"
-    return add_label if params['labels'].nil?
-    return label_name if JSON.parse(params['labels']).include? label_name
-    add_label
-  end
-
-  def label_name_to_remove(label_name)
-    "#{sanitize('&#65293;')} #{label_name}"
+  def base_tag_link(symbol: '&#65293;', body:, params: {}, css_class: 'badge')
+    link_to "#{sanitize(symbol)} #{body}", issues_path(params), class: css_class
   end
 end

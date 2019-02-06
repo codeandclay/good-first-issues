@@ -4,14 +4,8 @@
   </h1>
   <% if params['language'] || params['labels'] %>
     <div class="tags">
-      <% if params['language'] %>
-      <%= link_to "#{sanitize('&#65293;')} #{params['language']}", issues_path(labels: params['labels']), class: 'language-badge' %>
-      <% end %>
-      <% if params['labels'] %>
-        <% JSON.parse(params['labels']).each do |label| %>
-          <%= link_to "#{sanitize('&#65293;')} #{label}", issues_path(labels: labels_without_label(label), language: params['language']), class: 'label-badge' %>
-        <% end %>
-      <% end %>
+      <%= selected_language_link %>
+      <%= selected_labels_links %>
     </div>
   <% end %>
   <%= link_to 'See all tags', tags_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
