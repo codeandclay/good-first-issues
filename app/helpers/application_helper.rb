@@ -25,10 +25,8 @@ module ApplicationHelper
   end
 
   def language_name_to_add(language_name)
-    add_language = "#{sanitize('&#65291;')} #{language_name}"
-    return add_language if params['language'].nil?
     return language_name if params['language'] == language_name
-    add_language
+    "#{sanitize('&#65291;')} #{language_name}"
   end
 
   def language_name_to_remove(language_name)
