@@ -6,7 +6,7 @@ class DecoratedIssues < SimpleDelegator
   end
 
   def updated_at
-    first.updated_at
+    Issue.first.updated_at
   end
 
   def top_labels

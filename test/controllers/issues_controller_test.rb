@@ -88,4 +88,10 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     get "/issues?language=Language+A&labels=#{['Label+X'].to_json}"
     assert_equal 1, assigns(:issues).count
   end
+
+  test 'It doesn’t blow up when no issues are found' do
+    assert_nothing_raised do
+      get '/issues?language=NonexistantLanguage'
+    end
+  end
 end
