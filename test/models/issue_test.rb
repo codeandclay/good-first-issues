@@ -26,8 +26,11 @@ class IssueTest < ActiveSupport::TestCase
   test 'A collection of issues is returned when multiple labels are given' do
     label_a = Label.create(name: 'Label A')
     label_b = Label.create(name: 'Label B')
-    10.times { label_a.issues << Issue.create(language: @language) }
-    10.times { label_b.issues << Issue.create(language: @language) }
+    20.times {
+      issue = Issue.create(language: @language)
+      issue.labels << label_a
+      issue.labels << label_b
+    }
     assert_equal 20, Issue.by_labels(['Label A', 'Label B']).count
   end
 
@@ -54,10 +57,36 @@ class IssueTest < ActiveSupport::TestCase
     assert_equal ['bug', 'fix'], Issue.by_labels('bug').first.labels.map(&:name)
   end
 
+  test 'An issue must contain all labels used as filter' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    label_c = Label.create(name: 'enhancement')
+    label_d = Label.create(name: 'bounty')
+    Issue.create(language: @language, labels: [label_a, label_b])
+    Issue.create(language: @language, labels: [label_a, label_c])
+    Issue.create(language: @language, labels: [label_b, label_d])
+    assert_equal 1, Issue.by_labels(['bug', 'fix']).length
+  end
+
   test 'An issue is returned once only if multiple tags match' do
     label_a = Label.create(name: 'bug')
     label_b = Label.create(name: 'fix')
     Issue.create(language: @language, labels: [label_a, label_b])
     assert_equal 1, Issue.by_labels(['bug', 'fix']).count
+  end
+
+  test 'Issue id is returned when a label name is provided' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    Issue.create(language: @language, labels: [label_a, label_b])
+    assert_equal [Issue.first.id], Issue.ids_for_label(label_a.name)
+  end
+
+  test 'Multiple issue ids are returned when a label name is provided' do
+    label_a = Label.create(name: 'bug')
+    label_b = Label.create(name: 'fix')
+    issue_a = Issue.create(language: @language, labels: [label_a, label_b])
+    issue_b = Issue.create(language: @language, labels: [label_a, label_b])
+    assert_empty [issue_a.id, issue_b.id] - Issue.ids_for_label(label_a.name)
   end
 end

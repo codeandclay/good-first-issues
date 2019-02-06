@@ -6,7 +6,9 @@ class Issue < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   scope :by_labels, lambda { |labels|
-    joins(:labels).where(labels: { name: labels }).distinct
+    # `labels` needs to be coerced to an array so that the scope can accept a
+    # single string as an argument.
+    where(id: [*labels].map { |label| ids_for_label(label) }.reduce(&:&))
   }
 
   scope :by_language, lambda { |language|
@@ -16,4 +18,11 @@ class Issue < ApplicationRecord
   scope :by_language_and_labels, lambda { |language, labels|
     by_language(language).merge by_labels(labels)
   }
+
+  def self.ids_for_label(label_name)
+    joins(:labels)
+    .where(labels: { name: label_name })
+    .distinct
+    .pluck(:id)
+  end
 end
