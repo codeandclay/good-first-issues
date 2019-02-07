@@ -20,6 +20,6 @@ class DecoratedIssues < SimpleDelegator
   private
 
   def default_title
-    "Found #{pluralize(total_entries, 'issues')}"
+    "Found #{pluralize(total_entries, 'issue')}"
   end
 end
