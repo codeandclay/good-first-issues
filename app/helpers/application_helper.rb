@@ -48,7 +48,7 @@ module ApplicationHelper
         labels: labels + [label]
       },
       css_class: 'label-badge'
-    ) rescue binding.pry
+    )
   end
 
   def selected_labels_links
@@ -60,7 +60,11 @@ module ApplicationHelper
   end
 
   def base_tag_link(symbol: '&#65293;', body:, params: {}, css_class: 'badge')
-    link_to "#{sanitize(symbol)} #{body}", issues_path(params), class: css_class
+    link_to "#{sanitize(symbol)} #{body}", send(request_view.to_sym, params), class: css_class
+  end
+
+  def request_view
+    "#{request.path[/\w+/]}_path"
   end
 
   def labels
