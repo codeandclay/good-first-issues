@@ -8,5 +8,7 @@ class TagsController < ApplicationController
                    .pluck(:name)
                    .sort_by(&:downcase)
     @number_of_issues = Issue.number_of_issues_for(language: params[:language], labels: params[:labels])
+    @top_languages = Language.top
+    @top_labels = Label.top
   end
 end
