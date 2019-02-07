@@ -16,7 +16,12 @@ class Issue < ApplicationRecord
   }
 
   scope :by_language_and_labels, lambda { |language, labels|
-    by_language(language).merge by_labels(labels)
+    # TODO: Is this possible to achieve in a single query?
+    return by_language(language).merge by_labels(labels) if language && labels
+    return by_labels(labels) if labels
+    return by_language(language) if language
+
+    all
   }
 
   def self.ids_for_label(label_name)
