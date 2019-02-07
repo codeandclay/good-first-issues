@@ -1,11 +1,14 @@
 <div class="content">
-  <%= render 'shared/selected_tags' %>
-  <%= link_to "See #{pluralize(@number_of_issues, 'issue')}", issues_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
+  <div class="selected-tags">
+    <%= render 'shared/selected_tags' %>
+    <%= link_to "See #{pluralize(@number_of_issues, 'issue')}", issues_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
+  </div>
 
   <h2>Top languages</h2>
   <% @top_languages.each do |language| %>
     <%= language_link(language) %>
   <% end %>
+
   <h2>top labels</h2>
   <% @top_labels.each do |label| %>
     <%= label_link(label) %>

@@ -24,7 +24,6 @@
 }
 
 .tags-link {
-  margin: 0 0 1.5rem 0;
   display: block;
 }
 
@@ -153,4 +152,21 @@ button {
   .badge {
     display: inline-block;
   }
+}
+
+.selected-tags {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  background-color: white;
+  h2 {
+    margin-top: 0rem;
+  }
+}
+
+// Adjust vertical spacing of first title after selected tags
+.selected-tags + h2 {
+  margin-top: 0.75rem;
 }
