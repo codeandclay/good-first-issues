@@ -1,6 +1,6 @@
 <div class="content">
   <%= render 'shared/selected_tags' %>
-  <%= link_to 'See issues', issues_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
+  <%= link_to "See #{@number_of_issues} issues", issues_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
     <h2>All languages</h2>
     <% @languages.each do |language| %>
       <%= language_link(language) %>

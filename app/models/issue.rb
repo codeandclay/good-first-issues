@@ -24,6 +24,10 @@ class Issue < ApplicationRecord
     all
   }
 
+  def self.number_of_issues_for(language:, labels:)
+    by_language_and_labels(language, labels).size
+  end
+
   def self.ids_for_label(label_name)
     joins(:labels)
     .where(labels: { name: label_name })
