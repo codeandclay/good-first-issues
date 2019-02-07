@@ -23,14 +23,8 @@ module ApplicationHelper
     )
   end
 
-  def deserialized_labels_params
-    return [] if params['labels'].nil?
-
-    labels
-  end
-
   def label_link(label)
-    return add_label_link(label) unless deserialized_labels_params.include?(label)
+    return add_label_link(label) unless labels.include?(label)
     selected_label_link(label)
   end
 
@@ -39,23 +33,22 @@ module ApplicationHelper
       body: label,
       params: {
         language: params['language'],
-        labels: (deserialized_labels_params.reject { |i| i == label }).to_json
+        labels: labels.reject { |i| i == label }
       },
       css_class: 'label-badge'
     )
   end
 
   def add_label_link(label)
-    labels = deserialized_labels_params
     base_tag_link(
       body: label,
       symbol: '&#65291;',
       params: {
         language: params['language'],
-        labels: (labels + [label]).to_json
+        labels: labels + [label]
       },
       css_class: 'label-badge'
-    )
+    ) rescue binding.pry
   end
 
   def selected_labels_links
@@ -71,6 +64,7 @@ module ApplicationHelper
   end
 
   def labels
-    JSON.parse params['labels']
+    return [] if params['labels'].nil?
+    params['labels']
   end
 end
