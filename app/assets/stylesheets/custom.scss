@@ -27,10 +27,6 @@
   margin: 0 0 1.5rem 0;
   display: block;
 }
-.issues {
-  display: grid;
-  // grid-row-gap: 1rem;
-}
 
 .issue {
   @media (min-width: $small) {
@@ -145,7 +141,7 @@ button {
 
 .top-pagination {
   margin-top: 0.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .bottom-pagination {
