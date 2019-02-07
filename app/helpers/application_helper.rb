@@ -64,7 +64,7 @@ module ApplicationHelper
   end
 
   def request_view
-    "#{request.path[/\w+/]}_path"
+    "#{request.path[/\w+/] || 'root'}_path"
   end
 
   def labels
