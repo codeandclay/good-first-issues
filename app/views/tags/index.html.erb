@@ -1,4 +1,5 @@
 <div class="content">
+  <%= render 'shared/selected_tags' %>
     <h2>All languages</h2>
     <% @languages.each do |language| %>
       <%= language_link(language) %>
