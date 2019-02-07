@@ -1,9 +1,10 @@
 <div class="content issues">
+  <%= render 'shared/selected_tags' %>
+  <%= link_to 'See all tags', tags_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
+
   <h2><%= @issues.title %>
     <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span>
   </h2>
-  <%= render 'shared/selected_tags' %>
-  <%= link_to 'See all tags', tags_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
 
   <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>
