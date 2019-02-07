@@ -2,7 +2,9 @@
   <div class="selected-tags">
     <%= render 'shared/selected_tags' %>
     <%= link_to 'See all tags', tags_path(labels: params[:labels], language: params[:language])%>
-    <%= link_to '[Remove all tags]', issues_path, class: 'reset-tags-link' %>
+    <% if params? %>
+      <%= link_to '[Remove all tags]', issues_path, class: 'reset-tags-link' %>
+    <% end %>
   </div>
 
   <h2><%= @issues.title %>

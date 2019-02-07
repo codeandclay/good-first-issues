@@ -71,4 +71,8 @@ module ApplicationHelper
     return [] if params['labels'].nil?
     params['labels']
   end
+
+  def params?
+    params[:labels] || params[:language]
+  end
 end
