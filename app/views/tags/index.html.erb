@@ -2,6 +2,7 @@
   <div class="selected-tags">
     <%= render 'shared/selected_tags' %>
     <%= link_to "See #{pluralize(@number_of_issues, 'issue')}", issues_path(labels: params[:labels], language: params[:language]), class: 'tags-link' %>
+    <%= link_to '[Remove all tags]', tags_path, class: 'reset-tags-link' %>
   </div>
 
   <h2>Top languages</h2>

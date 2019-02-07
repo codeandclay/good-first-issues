@@ -23,8 +23,11 @@
   margin-bottom: 1rem;
 }
 
-.tags-link {
-  display: block;
+.reset-tags-link {
+  color: $grey;
+  margin-left: 0.25rem;
+  font-weight: lighter;
+  text-decoration: none;
 }
 
 .issue {
