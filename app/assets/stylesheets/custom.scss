@@ -116,6 +116,13 @@
   margin-bottom: 0.25rem;
 }
 
+.no-tags-badge {
+  @extend .badge;
+  background-color: $red;
+  color: white;
+  margin-bottom: 0.25rem;
+}
+
 button {
   cursor: pointer;
   place-self: center;
