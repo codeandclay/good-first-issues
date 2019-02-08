@@ -60,11 +60,11 @@ module ApplicationHelper
   end
 
   def base_tag_link(symbol: '&#65293;', body:, params: {}, css_class: 'badge')
-    link_to "#{sanitize(symbol)} #{body}", send(request_view.to_sym, params), class: css_class
+    link_to "#{sanitize(symbol)} #{body}", send(controller_path, params), class: css_class
   end
 
-  def request_view
-    "#{request.path[/\w+/] || 'root'}_path"
+  def controller_path
+    "#{controller_name}_path".to_sym
   end
 
   def labels
