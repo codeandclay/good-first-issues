@@ -7,23 +7,5 @@
     <% end %>
   </div>
 
-  <h2>Top languages</h2>
-  <% @top_languages.each do |language| %>
-    <%= language_link(language) %>
-  <% end %>
-
-  <h2>top labels</h2>
-  <% @top_labels.each do |label| %>
-    <%= label_link(label) %>
-  <% end %>
-
-  <h2>All languages</h2>
-  <% @languages.each do |language| %>
-    <%= language_link(language) %>
-  <% end %>
-
-  <h2>All labels</h2>
-  <% @labels.each do |label| %>
-    <%= label_link(label) %>
-  <% end %>
+  <%= render 'ajax_buttons' %>
 </div>
