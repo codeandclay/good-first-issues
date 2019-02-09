@@ -1,75 +1,83 @@
 module ApplicationHelper
-  def language_link(language)
-    return selected_language_link if language == params['language']
-    add_language_link(language)
+  ADDITION_SYMBOL = '&#65291;'.freeze
+  SUBTRACTION_SYMBOL = '&#65293;'.freeze
+
+  def language_link(name: params[:language], is_remote: false)
+    if action_for_language(name) == :remove
+      base_tag_link(
+        body: name,
+        css_class: 'language-badge',
+        params: { labels: params[:labels] },
+        method: link_method(is_remote)
+      )
+    else
+      base_tag_link(
+        body: name,
+        css_class: 'language-badge',
+        params: { labels: params['labels'], language: name },
+        method: link_method(is_remote),
+        symbol: ADDITION_SYMBOL
+      )
+    end
   end
 
-  def selected_language_link
-    return if params['language'].nil?
-
-    base_tag_link(
-      body: params['language'],
-      params: { labels: params[:labels] },
-      css_class: 'language-badge'
-    )
-  end
-
-  def add_language_link(language)
-    base_tag_link(
-      symbol: '&#65291;',
-      body: language,
-      params: { labels: params['labels'], language: language },
-      css_class: 'language-badge'
-    )
-  end
-
-  def label_link(label)
-    return add_label_link(label) unless labels.include?(label)
-    selected_label_link(label)
-  end
-
-  def selected_label_link(label)
-    base_tag_link(
-      body: label,
-      params: {
-        language: params['language'],
-        labels: labels.reject { |i| i == label }
-      },
-      css_class: 'label-badge'
-    )
-  end
-
-  def add_label_link(label)
-    base_tag_link(
-      body: label,
-      symbol: '&#65291;',
-      params: {
-        language: params['language'],
-        labels: labels + [label]
-      },
-      css_class: 'label-badge'
-    )
-  end
-
-  def selected_labels_links
-    return if params['labels'].nil?
-
-    labels.map do |label|
-      selected_label_link(label)
-    end.join(' ').html_safe
-  end
-
-  def base_tag_link(symbol: '&#65293;', body:, params: {}, css_class: 'badge')
-    link_to "#{sanitize(symbol)} #{body}", send(controller_path, params), class: css_class
-  end
-
-  def controller_path
-    "#{controller_name}_path".to_sym
+  def label_link(name:, is_remote: false)
+    if action_for_label(name) == :remove
+      base_tag_link(
+        body: name,
+        css_class: 'label-badge',
+        params: {
+          language: params['language'],
+          labels: labels.reject { |i| i == name }
+        },
+        method: link_method(is_remote)
+      )
+    else
+      base_tag_link(
+        body: name,
+        css_class: 'label-badge',
+        params: {
+          language: params['language'],
+          labels: labels + [name]
+        },
+        method: link_method(is_remote),
+        symbol: ADDITION_SYMBOL
+      )
+    end
   end
 
   def labels
     return [] if params['labels'].nil?
     params['labels']
+  end
+
+  def link_method(is_remote)
+    return :button_to if is_remote
+    :link_to
+  end
+
+  def action_for_language(name)
+    return :remove if params[:language] == name
+    :add
+  end
+
+  def action_for_label(name)
+    return :remove if [*params[:labels]].include?(name)
+    :add
+  end
+
+  def remove_labels_links
+    labels.map do |label|
+      label_link(name: label)
+    end.join(' ').html_safe
+  end
+
+  def base_tag_link(method: :link_to, symbol: SUBTRACTION_SYMBOL, body:, params: {}, css_class: 'badge')
+    send(method, "#{sanitize(symbol)} #{body}", send(controller_path, params), class: css_class)
+  end
+
+  def controller_path
+    "#{controller_name}_path".to_sym
   end
 
   def params?

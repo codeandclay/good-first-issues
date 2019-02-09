@@ -7,9 +7,9 @@
     <span class="issue-title"><%= link_to issue.title, issue.url %></span>
     <span class="created-at"><%= time_ago_in_words(issue.created_at) %> ago</span>
     <div class="labels">
-      <%= language_link(issue.language.name) %>
+      <%= language_link(name: issue.language.name) %>
       <% issue.labels.each do |label| %>
-        <%= label_link(label.name) %>
+        <%= label_link(name: label.name) %>
       <% end %>
     </div>
   </div>
