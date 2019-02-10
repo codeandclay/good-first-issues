@@ -72,8 +72,9 @@ module ApplicationHelper
     end.join(' ').html_safe
   end
 
-  def base_tag_link(method: :link_to, symbol: SUBTRACTION_SYMBOL, body:, params: {}, css_class: 'badge')
-    send(method, "#{sanitize(symbol)} #{body}", send(controller_path, params), class: css_class)
+  def base_tag_link(method: :link_to, symbol: SUBTRACTION_SYMBOL, body:, params: {}, css_class: 'badge', remote: false)
+    remote = true if method == :button_to
+    send(method, "#{sanitize(symbol)} #{body}", send(controller_path, params), class: css_class, remote: remote)
   end
 
   def controller_path
