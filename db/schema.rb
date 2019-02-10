@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_133348) do
+ActiveRecord::Schema.define(version: 2019_02_10_183049) do
 
   create_table "issues", force: :cascade do |t|
     t.boolean "assigned"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_133348) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_languages_on_name"
   end
 
   create_table "tags", force: :cascade do |t|
