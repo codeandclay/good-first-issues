@@ -7,6 +7,21 @@
     <% end %>
   </div>
 
+  <div class="filtered-tags">
+    <h2>Search labels</h2>
+    <%= form_with url: filtered_tags_path, class: 'filter-box' do %>
+      <%= text_field_tag(:filter_by, '', id: 'filter-text-field') %>
+    <% end %>
+    <script>
+      document.getElementById('filter-text-field').addEventListener('keyup', function(){
+        Rails.fire(this.form, 'submit')
+      })
+    </script>
+    <div class="filter-results">
+      <div class="badge no-tags-badge">No tags found</div>
+    </div>
+  </div>
+
   <h2><%= @issues.title %>
     <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span>
   </h2>

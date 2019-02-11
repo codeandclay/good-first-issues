@@ -1,0 +1,7 @@
+<% if @labels.present? %>
+  <% @labels.each do |label| %>
+    <%= label_link(name: label.name) %>
+  <% end %>
+<% else %>
+  <div class="badge no-tags-badge">No tags found</div>
+<% end %>

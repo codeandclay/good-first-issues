@@ -182,3 +182,14 @@ input, button, submit {
 .button_to {
   display: inline-block;
 }
+
+.filter-box > input[type=text] {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem;
+  border-color: $medium-grey;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  margin-bottom: 1.25rem;
+}

@@ -12,6 +12,7 @@ class Label < ApplicationRecord
   end
 
   scope :by_search_term, lambda { |term|
+    return Label.none if term.empty?
     where("name LIKE ?", "%#{term}%")
   }
 end
