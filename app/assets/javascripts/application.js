@@ -14,3 +14,9 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function watch_form() {
+  document.getElementById('filter-text-field').addEventListener('keyup', function(){
+    Rails.fire(this.form, 'submit')
+  })
+}

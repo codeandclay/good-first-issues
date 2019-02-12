@@ -3,3 +3,15 @@ document.querySelector('.issues')
 
 document.querySelector('.selected-tags')
         .innerHTML = "<%= escape_javascript(render 'shared/selected_tags') %>"
+
+document.querySelector('.filter-results')
+        .innerHTML = '<div class="badge no-tags-badge">No tags found</div>'
+
+document.querySelector('.filter-form')
+        .innerHTML = "<%= escape_javascript(render 'filter_form') %>"
+// Since the form has been replaced in the DOM, we need to register a new
+// event listener
+watch_form()
+
+document.getElementById('filter-text-field')
+        .value = ''
