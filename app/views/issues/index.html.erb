@@ -21,8 +21,6 @@
   </h2>
 
   <div class="issues">
-    <%= will_paginate @issues, class: 'pagination top-pagination' %>
-    <%= render @issues %>
-    <%= will_paginate @issues, class: 'pagination bottom-pagination' %>
+    <%= render 'issues' %>
   </div>
 </div>

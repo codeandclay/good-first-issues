@@ -1,5 +1,5 @@
 document.querySelector('.issues')
-        .innerHTML = "<%= escape_javascript(render @issues) %>"
+        .innerHTML = "<%= escape_javascript(render 'issues') %>"
 
 document.querySelector('.selected-tags')
         .innerHTML = "<%= escape_javascript(render 'shared/selected_tags') %>"
