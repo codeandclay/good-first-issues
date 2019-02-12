@@ -88,7 +88,7 @@ module ApplicationHelper
     params['labels']
   end
 
-  def remove_labels_links
+  def selected_labels_links
     labels.map do |label|
       label_link(name: label)
     end.join(' ').html_safe
