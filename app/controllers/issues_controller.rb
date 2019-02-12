@@ -3,6 +3,13 @@ class IssuesController < ApplicationController
     @issues = DecoratedIssues.new(paginated_issues.preload(:labels, :language))
   end
 
+  def create
+    @issues = DecoratedIssues.new(paginated_issues.preload(:labels, :language))
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def paginated_issues
