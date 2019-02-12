@@ -1,6 +1,6 @@
 <% if @labels.present? %>
   <% @labels.each do |label| %>
-    <%= label_link(name: label.name) %>
+    <%= label_link(name: label.name, is_remote: true) %>
   <% end %>
 <% else %>
   <div class="badge no-tags-badge">No tags found</div>

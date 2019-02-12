@@ -90,7 +90,7 @@ module ApplicationHelper
 
   def selected_labels_links
     labels.map do |label|
-      label_link(name: label)
+      label_link(name: label, is_remote: true)
     end.join(' ').html_safe
   end
 
