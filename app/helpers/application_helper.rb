@@ -100,7 +100,7 @@ module ApplicationHelper
     css_class: 'badge',
     path: controller_path
   )
-    link_to "#{sanitize(symbol)} #{body}", send(path, params), class: css_class
+    link_to "#{sanitize(symbol)} #{body}", issues_path(params), class: css_class
   end
 
   def button_tag_for(
@@ -109,7 +109,7 @@ module ApplicationHelper
     css_class: 'badge',
     path: controller_path
   )
-    button_to "#{sanitize(symbol)} #{body}", send(path, params), class: css_class, remote: true
+    button_to "#{sanitize(symbol)} #{body}", issues_path(params), class: css_class, remote: true
   end
 
   def controller_path
