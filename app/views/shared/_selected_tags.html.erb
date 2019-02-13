@@ -1,4 +1,4 @@
-<% if params['language'] || params['labels'] %>
+<% if selected_tags? %>
   <div class="tags">
   <h2>Selected tags</h2>
     <%= language_link(is_remote: true) unless params[:language].nil? %>

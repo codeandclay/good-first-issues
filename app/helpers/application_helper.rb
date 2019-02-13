@@ -50,7 +50,7 @@ module ApplicationHelper
     end
 
     def new_tags
-      return { labels: tags[:labels] } if action == :remove
+      return { labels: tags[:labels], language: '' } if action == :remove
       { labels: tags[:labels], language: body }
     end
   end
@@ -69,7 +69,17 @@ module ApplicationHelper
 
     def new_tags
       return { language: tags[:language], labels: [*tags[:labels]] + [body] } if action == :add
-      { language: tags[:language], labels: [*tags[:labels]].reject { |i| i == body } }
+      # TODO: Fix this fudge.
+      # Tags cannot be removed unless an empty string `['']` is sent in the
+      # params `labels: ['']`. Otherwise the controller will look at the params
+      # and see `nil` -- for instance, the pagination links don't send labels or
+      # language params -- and decide not to change the session values.
+      # Ideally I think I need a model/models to represent the session params.
+      { language: tags[:language], labels: [*tags[:labels]].map do |i|
+          next '' if i == body
+          i
+        end
+      }
     end
   end
 
@@ -115,16 +125,16 @@ module ApplicationHelper
     "#{controller_name}_path".to_sym
   end
 
-  def params?
+  def selected_tags?
     labels.present? || language
   end
 
   def labels
-    return [] if params['labels'].nil?
-    params['labels']
+    return [] if session['labels'].nil?
+    session['labels']
   end
 
   def language
-    params[:language]
+    session[:language]
   end
 end

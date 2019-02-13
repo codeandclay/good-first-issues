@@ -17,8 +17,18 @@ class Issue < ApplicationRecord
 
   scope :by_language_and_labels, lambda { |language, labels|
     # TODO: Is this possible to achieve in a single query?
-    return by_language(language).merge by_labels(labels) if language && labels
-    return by_labels(labels) if labels
+    #
+    # TODO: labels.any is necessary because of the fudge in
+    # ApplicationController. Tags cannot be removed unless an empty string
+    # `['']` is sent in the params `labels: ['']`. Otherwise the controller
+    # will look at the params and see `nil` -- for instance, the pagination
+    # links don't send labels or language params -- and decide not to change
+    # the session values. But then we end up with an empty array here and so I
+    # have to check is it's populated or not. Fix this!
+    # Ideally I think I need a model/models to represent the session params.
+
+    return by_language(language).merge by_labels(labels) if language && [*labels].any?
+    return by_labels(labels) if [*labels].any?
     return by_language(language) if language
 
     all

@@ -97,6 +97,6 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
 
   test 'params are saved to session' do
     get(issues_path, params: { language: 'C' })
-    assert_equal session[:language], 'C'
+    assert_equal 'C', session[:language]
   end
 end

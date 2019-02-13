@@ -19,12 +19,12 @@ class IssuesController < ApplicationController
   end
 
   def labels
-    return if params[:labels].nil?
-    params[:labels]
+    return if session[:labels].nil?
+    session[:labels]
   end
 
   def language
-    params[:language]
+    session[:language]
   end
 
   def issues
