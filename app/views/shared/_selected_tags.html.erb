@@ -1,12 +1,9 @@
-<% if selected_tags? %>
-  <div class="tags">
-  <h2>Selected tags</h2>
-    <%= language_link(is_remote: true) unless params[:language].nil? %>
-    <%= selected_labels_links %>
-  </div>
-<% else %>
-  <div class="tags">
-  <h2>Selected tags</h2>
-  <div class="badge no-tags-badge">No tags selected</div>
-  </div>
-<% end %>
+<div class="tags">
+  <h3>Selected labels</h3>
+  <% if selected_tags? %>
+      <%= language_link(is_remote: true) unless params[:language].nil? %>
+      <%= selected_labels_links %>
+  <% else %>
+    <div class="badge no-tags-badge">No tags selected</div>
+  <% end %>
+</div>
