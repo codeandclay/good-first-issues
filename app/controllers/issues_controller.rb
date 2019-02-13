@@ -1,4 +1,6 @@
 class IssuesController < ApplicationController
+  before_action :save_params_to_session, only: [:index, :create]
+
   def index
     @issues = DecoratedIssues.new(paginated_issues.preload(:labels, :language))
   end
