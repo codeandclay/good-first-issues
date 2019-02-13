@@ -1,0 +1,4 @@
+<h3>Top labels</h3>
+<% @issues.top_labels.each do |label| %>
+  <%= label_link(name: label) %>
+<% end %>

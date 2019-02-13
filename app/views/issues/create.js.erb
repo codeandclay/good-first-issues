@@ -4,6 +4,9 @@ document.querySelector('.issues')
 document.querySelector('.selected-tags')
         .innerHTML = "<%= escape_javascript(render 'shared/selected_tags') %>"
 
+document.querySelector('.top-labels')
+        .innerHTML = "<%= escape_javascript(render 'shared/top_labels') %>"
+
 document.querySelector('.filter-results')
         .innerHTML = '<div class="badge no-tags-badge">No tags found</div>'
 
