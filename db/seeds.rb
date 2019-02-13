@@ -75,8 +75,10 @@ end
 time_started = Time.now
 
 # Get a list of all languages on Github
-languages = JSON.parse(open('https://api.github.com/languages').read)
-                .map { |language| language['name'] }
+# languages = JSON.parse(open('https://api.github.com/languages').read)
+#                 .map { |language| language['name'] }
+
+languages = ['Ruby']
 
 # Now get a list of issues for each language
 all_issues = languages.flat_map do |language|
