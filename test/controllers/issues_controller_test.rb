@@ -86,7 +86,7 @@ class IssuesControllerTest < ActionDispatch::IntegrationTest
     @issues.first.labels << Label.create(name: 'Label X')
     @issues.last.labels << Label.first_or_create(name: 'Label X')
     get(issues_path, params: { language: 'Language A', labels: ['Label X'] })
-    assert_equal 1, assigns(:issues).count
+    assert_equal 1, assigns(:issues).length
   end
 
   test 'It doesn’t blow up when no issues are found' do

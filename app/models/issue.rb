@@ -8,7 +8,11 @@ class Issue < ApplicationRecord
   scope :by_labels, lambda { |labels|
     # `labels` needs to be coerced to an array so that the scope can accept a
     # single string as an argument.
-    where(id: [*labels].map { |label| ids_for_label(label) }.reduce(&:&))
+    labels = [*labels]
+    joins(:labels)
+      .where(labels: { name: labels })
+      .having("COUNT(labels.id) = #{labels.size}")
+      .group('issues.id')
   }
 
   scope :by_language, lambda { |language|
