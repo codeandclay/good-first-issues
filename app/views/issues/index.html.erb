@@ -1,9 +1,6 @@
 <div class="content">
   <div class="selected-tags">
     <%= render 'shared/selected_tags' %>
-    <% if selected_tags? %>
-      <%= link_to '[Remove all tags]', issues_path, class: 'reset-tags-link' %>
-    <% end %>
   </div>
 
   <div class="filtered-tags">
