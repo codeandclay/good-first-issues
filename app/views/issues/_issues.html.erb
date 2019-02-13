@@ -1,3 +1,7 @@
+<h2><%= @issues.title %>
+  <span class="meta">Updated <%= time_ago_in_words(@issues.updated_at) %> ago</span>
+</h2>
+
 <%= will_paginate @issues, class: 'pagination top-pagination' %>
   <%= render @issues %>
 <%= will_paginate @issues, class: 'pagination bottom-pagination' %>
