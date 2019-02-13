@@ -6,22 +6,22 @@ module ApplicationHelper
     ADDITION_SYMBOL = '&#65291;'.freeze
     SUBTRACTION_SYMBOL = '&#65293;'.freeze
 
-    def initialize(body:, params:)
-      @params = params
+    def initialize(body:, tags:)
+      @tags = tags
       @body = body
     end
 
     def to_h
       {
         body: body,
-        params: new_params,
+        params: new_tags,
         symbol: symbol
       }
     end
 
     private
 
-    attr_accessor :params, :body
+    attr_accessor :tags, :body
 
     def action
       raise NotImplementedError
@@ -32,7 +32,7 @@ module ApplicationHelper
       ADDITION_SYMBOL
     end
 
-    def new_params
+    def new_tags
       raise NotImplementedError
     end
   end
@@ -45,13 +45,13 @@ module ApplicationHelper
     private
 
     def action
-      return :remove if params[:language] == body
+      return :remove if tags[:language] == body
       :add
     end
 
-    def new_params
-      return { labels: params[:labels] } if action == :remove
-      { labels: params[:labels], language: body }
+    def new_tags
+      return { labels: tags[:labels] } if action == :remove
+      { labels: tags[:labels], language: body }
     end
   end
 
@@ -63,29 +63,26 @@ module ApplicationHelper
     private
 
     def action
-      return :remove if [*params[:labels]].include?(body)
+      return :remove if [*tags[:labels]].include?(body)
       :add
     end
 
-    def new_params
-      return { language: params['language'], labels: [*params[:labels]] + [body] } if action == :add
-      { language: params['language'], labels: [*params[:labels]].reject { |i| i == body } }
+    def new_tags
+      return { language: tags[:language], labels: [*tags[:labels]] + [body] } if action == :add
+      { language: tags[:language], labels: [*tags[:labels]].reject { |i| i == body } }
     end
   end
 
-  def language_link(name: params[:language], is_remote: false)
-    return button_tag_for(LanguageTagOptions.new(body: name, params: params).to_h) if is_remote
-    link_tag_for(LanguageTagOptions.new(body: name, params: params).to_h)
+  def language_link(name: language, is_remote: false)
+    tags = {language: language, labels: labels}
+    return button_tag_for(LanguageTagOptions.new(body: name, tags: tags).to_h) if is_remote
+    link_tag_for(LanguageTagOptions.new(body: name, tags: tags).to_h)
   end
 
   def label_link(name:, is_remote: false)
-    return button_tag_for(LabelTagOptions.new(body: name, params: params).to_h) if is_remote
-    link_tag_for(LabelTagOptions.new(body: name, params: params).to_h)
-  end
-
-  def labels
-    return [] if params['labels'].nil?
-    params['labels']
+    tags = {language: language, labels: labels}
+    return button_tag_for(LabelTagOptions.new(body: name, tags: tags).to_h) if is_remote
+    link_tag_for(LabelTagOptions.new(body: name, tags: tags).to_h)
   end
 
   def selected_labels_links
@@ -96,7 +93,8 @@ module ApplicationHelper
 
   def link_tag_for(
     symbol: SUBTRACTION_SYMBOL,
-    body:, params: {},
+    body:,
+    params: {},
     css_class: 'badge',
     path: controller_path
   )
@@ -105,7 +103,8 @@ module ApplicationHelper
 
   def button_tag_for(
     symbol: SUBTRACTION_SYMBOL,
-    body:, params: {},
+    body:,
+    params: {},
     css_class: 'badge',
     path: controller_path
   )
@@ -117,6 +116,15 @@ module ApplicationHelper
   end
 
   def params?
-    params[:labels] || params[:language]
+    labels.present? || language
+  end
+
+  def labels
+    return [] if params['labels'].nil?
+    params['labels']
+  end
+
+  def language
+    params[:language]
   end
 end
