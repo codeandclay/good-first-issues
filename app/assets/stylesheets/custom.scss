@@ -93,8 +93,8 @@
         display: inline-block;
         width: auto;
         cursor: pointer;
-        background-color: $green;
-        color: white;
+        background-color: $button-primary;
+        color: $button-primary-text;
       }
     }
   }
@@ -109,15 +109,15 @@
 
 .label-badge {
   @extend .badge;
-  background-color: $green;
-  color: white;
+  background-color: $button-primary;
+  color: $button-primary-text;
   margin: 0 0 0.25rem 0;
 }
 
 .no-tags-badge {
   @extend .badge;
   background-color: $red;
-  color: white;
+  color: $button-primary-text;
   margin-bottom: 0.25rem;
 }
 
@@ -162,9 +162,12 @@ button {
   position: -webkit-sticky;
   top: 0;
   padding-top: 0.5rem;
-  background-color: white;
+  background-color: $background-color;
   h2 {
     margin-top: 0rem;
+  }
+  .label-badge {
+    background-color: $button-selected;
   }
 }
 
@@ -191,4 +194,8 @@ input, button, submit {
   border-width: 1px;
   border-radius: 4px;
   margin-bottom: 1.25rem;
+}
+
+.issues {
+  margin-top: 2.5rem;
 }
