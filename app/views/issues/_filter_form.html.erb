@@ -1,4 +1,4 @@
 <%= form_with url: filtered_tags_path, class: 'filter-box' do %>
-  <%= text_field_tag(:filter_by, '', id: 'filter-text-field', autocomplete: 'off') %>
+  <%= text_field_tag(:filter_by, '', id: filter_field_id, autocomplete: 'off') %>
 <% end %>
 <script>watch_form()</script>

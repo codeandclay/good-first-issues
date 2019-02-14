@@ -137,4 +137,8 @@ module ApplicationHelper
   def language
     session[:language]
   end
+
+  def filter_field_id
+    'filter-text-field'
+  end
 end

@@ -11,7 +11,7 @@ document.querySelector('.filter-results')
         .innerHTML = '<div class="badge no-tags-badge">No tags found</div>'
 
 document.querySelector('.filter-form')
-        .innerHTML = "<%= escape_javascript(render 'filter_form') %>"
+        .innerHTML = "<%= escape_javascript(render 'filter_form', filter_field_id: filter_field_id) %>"
 // Since the form has been replaced in the DOM, we need to register a new
 // event listener
 watch_form()
