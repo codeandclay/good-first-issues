@@ -35,6 +35,12 @@
   text-decoration: none;
 }
 
+.issues {
+  h2{
+    margin-bottom: 0.5rem;
+  }
+}
+
 .issue {
   @media (min-width: $small) {
     display: grid;
@@ -200,7 +206,7 @@ input, button, submit {
   border-style: solid;
   border-width: 1px;
   border-radius: 4px;
-  // margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .filtered-tags {

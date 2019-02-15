@@ -138,7 +138,11 @@ module ApplicationHelper
     session[:language]
   end
 
-  def filter_field_id
-    'filter-text-field'
+  def label_filter_id
+    'tag-filter-field'
+  end
+
+  def label_filter_title
+    'Search for more labels'
   end
 end

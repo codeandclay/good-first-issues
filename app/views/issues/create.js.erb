@@ -10,11 +10,15 @@ document.querySelector('.top-labels')
 document.querySelector('.filter-results')
         .innerHTML = '<div class="badge no-tags-badge">No tags found</div>'
 
+
+document.getElementById('<%= label_filter_id %>').value = ''
+
 document.querySelector('.filter-form')
-        .innerHTML = "<%= escape_javascript(render 'filter_form', filter_field_id: filter_field_id) %>"
+        .innerHTML =
+        "<%= escape_javascript(render 'filter_form', filter_id: label_filter_id, title: label_filter_title) %>"
 // Since the form has been replaced in the DOM, we need to register a new
 // event listener
-watch_form()
+// Note: I'm sure why I need to call it here because I'm also calling it in the form partial.
+// TODO: Find out why it doesn't get triggered in the partial.
+watch_form('<%= label_filter_id %>')
 
-document.getElementById('filter-text-field')
-        .value = ''

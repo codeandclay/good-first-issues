@@ -15,8 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
-function watch_form() {
-  document.getElementById('filter-text-field').addEventListener('keyup', function(){
+function watch_form(id) {
+  document.getElementById(id).addEventListener('keyup', function(){
     Rails.fire(this.form, 'submit')
   })
 }
