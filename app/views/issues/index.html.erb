@@ -2,21 +2,21 @@
   <div class="selected-tags">
     <%= render 'shared/selected_tags' %>
   </div>
-
-  <div class="top-labels">
-    <%= render 'shared/top_labels' %>
-  </div>
-
-  <div class="filtered-tags">
-    <h4>Search for more labels</h4>
-    <div class="filter-form">
-      <%= render 'filter_form', filter_field_id: filter_field_id %>
+  <div class="filters">
+    <div class="top-labels">
+      <%= render 'shared/top_labels' %>
     </div>
-    <div class="filter-results">
-      <div class="badge no-tags-badge">No tags found</div>
+
+    <div class="filtered-tags">
+      <h4>Search for more labels</h4>
+      <div class="filter-form">
+        <%= render 'filter_form', filter_field_id: filter_field_id %>
+      </div>
+      <div class="filter-results">
+        <div class="badge no-tags-badge">No tags found</div>
+      </div>
     </div>
   </div>
-
   <div class="issues">
     <%= render 'issues' %>
   </div>
